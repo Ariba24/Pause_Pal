@@ -27,32 +27,17 @@ Boost your productivity with mindful, scheduled breaks — powered by a beautifu
 ### Settings Screen
 ![Settings Screen](settings.jpeg)
 
-## 📜 License
-© 2025 Ariba Arzi | Version 1.0.0
-
-## 📸 Screenshots
-
-### 🟪 Welcome Screen
-![Welcome Screen](screenshots/1_welcome.jpeg)
-
-### 🟪 Settings Page
-![Settings Screen](screenshots/2_settings.jpeg)
-
 ### 🟪 Break Timer
-![Timer Screen](screenshots/3_timer.jpeg)
+![Timer Screen](timer.jpeg)
 
 ### 🟪 Break Reminder
-![Reminder Screen](screenshots/4_reminder.jpeg)
+![Reminder Screen](break-reminder.jpeg)
 
 ### 🟪 Notes App
-![Notes App](screenshots/5_notes.jpeg)
+![Notes App](notes.jpeg)
 
 ### 🟪 Product Info Page
-![Product Info](screenshots/6_productinfo.jpeg)
-
-### 🟪 Feedback Form
-![Feedback Form](screenshots/7_feedback.jpeg)
-
+![Product Info](product-info.jpeg)
 ---
 
 ## 🧠 How It Works Without Backend
