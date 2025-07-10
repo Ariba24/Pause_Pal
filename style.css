@@ -1,0 +1,493 @@
+:root { 
+  --primary: #b19cd9;
+  --accent: #87cefa;
+  --bg-dark: #0d0b1e;
+  --bg-light: #1e1c3b;
+  --text-light: #e5e5ff;
+  --neon-blue: #6ac9ff;
+  --neon-pink: #ff99e0;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom right, var(--bg-dark), var(--bg-light));
+  color: var(--text-light);
+  transition: background 0.3s, color 0.3s;
+  overflow-x: hidden;
+}
+
+.dark {
+  background: linear-gradient(to bottom right, #0a0a0a, #1a1a1a);
+  color: #ffffff;
+}
+
+.screen {
+  display: none;
+  padding: 20px;
+  backdrop-filter: blur(18px);
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.screen.active {
+  display: block;
+}
+
+/* 🌗 Switch-style Dark Mode Toggle */
+.toggle-container {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 20;
+}
+
+.theme-switch {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--text-light);
+  background: rgba(255, 255, 255, 0.08);
+  padding: 8px 14px;
+  border-radius: 30px;
+}
+
+
+
+
+.theme-switch input {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+}
+
+.switch-label {
+  cursor: pointer;
+  text-indent: -9999px;
+  width: 50px;
+  height: 25px;
+  background: var(--neon-pink);
+  display: block;
+  border-radius: 100px;
+  position: relative;
+  transition: background 0.3s;
+  box-shadow: 0 0 10px var(--neon-pink);
+}
+
+.switch-label:after {
+  content: '🌞';
+  position: absolute;
+  left: 4px;
+  top: 2px;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 50%;
+  transition: all 0.3s;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.theme-switch input:checked + .switch-label {
+  background: var(--neon-blue);
+  box-shadow: 0 0 10px var(--neon-blue);
+}
+
+.theme-switch input:checked + .switch-label:after {
+  left: 26px;
+  content: '🌙';
+}
+
+/* 🔼 Fix overlap on settings heading */
+#settings-screen h2 {
+  margin-top: 60px;
+}
+
+/* 🧊 Welcome Screen */
+.welcome-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  margin: 60px auto;
+  max-width: 900px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  box-shadow: 0 0 20px var(--neon-blue);
+  overflow: hidden;
+}
+
+.welcome-left {
+  flex: 1 1 300px;
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+}
+
+.welcome-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.welcome-right {
+  flex: 1 1 300px;
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #0f0f1e;
+  text-align: center;
+}
+
+.logo-text {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--neon-pink);
+  margin-bottom: 10px;
+}
+
+.tagline {
+  font-size: 18px;
+  color: #bbb;
+  margin-bottom: 30px;
+  text-shadow: none;
+}
+
+.welcome-right button {
+  background-color: #8000ff;
+  color: white;
+  border: none;
+  padding: 14px 20px;
+  font-size: 16px;
+  border-radius: 30px;
+  margin: 10px 0;
+  width: 100%;
+  max-width: 240px;
+  align-self: center;
+  box-shadow: 0 0 10px #c580ff;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.welcome-right button:hover {
+  background-color: #a64dff;
+  box-shadow: 0 0 20px #c580ff;
+}
+
+/* 🌊 Background Animation */
+.cyberpunk-waves {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 150, 255, 0.1), transparent 60%),
+              radial-gradient(circle at 70% 70%, rgba(100, 200, 255, 0.15), transparent 60%),
+              repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 6px);
+  z-index: -1;
+  animation: pulse 10s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.03); opacity: 1; }
+}
+
+/* Forms */
+input[type="number"],
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #555;
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  box-shadow: none; /* removed neon glow */
+  outline: none;
+  transition: border 0.3s;
+}
+
+input[type="number"]:focus,
+input[type="text"]:focus,
+textarea:focus {
+  border-color: var(--neon-blue); /* optional: blue border on focus */
+}
+
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+/* 🪄 Settings Heading Bar - restored neon glow */
+.settings-heading-bar {
+  background: linear-gradient(90deg, #ff66cc, #66ccff);
+  padding: 14px 28px;
+  border-radius: 16px;
+  margin: 20px auto;
+  width: fit-content;
+  max-width: 95%;
+  text-align: center;
+  box-shadow: 0 0 18px var(--neon-pink), 0 0 10px var(--neon-blue);
+}
+
+.settings-heading-bar h2 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 800;
+  color: #ffffff;
+  text-shadow: 0 0 10px var(--neon-pink), 0 0 6px var(--neon-blue);
+}
+
+/* ✅ Custom Checkboxes */
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin: 20px 0;
+}
+
+.checkbox-group label {
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #ffffff;
+}
+
+.checkbox-group input[type="checkbox"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--neon-pink);
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.checkbox-group input[type="checkbox"]:checked {
+  background: var(--neon-blue);
+  border-color: var(--neon-blue);
+}
+
+.checkbox-group input[type="checkbox"]::after {
+  content: '✓';
+  position: absolute;
+  top: 0;
+  left: 3px;
+  font-size: 16px;
+  color: #000;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.checkbox-group input[type="checkbox"]:checked::after {
+  opacity: 1;
+}
+
+/* 💠 Buttons */
+button {
+  background: linear-gradient(135deg, #7c3aed, #00f0ff);
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  margin: 12px;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 14px var(--neon-blue), 0 0 10px var(--neon-pink);
+  transition: transform 0.3s, box-shadow 0.4s;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px var(--neon-blue), 0 0 16px var(--neon-pink);
+}
+
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.styled-back {
+  background: transparent;
+  border: 2px solid var(--neon-pink);
+  color: var(--neon-pink);
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.styled-back:hover {
+  background: var(--neon-pink);
+  color: #000;
+  box-shadow: 0 0 12px var(--neon-pink);
+}
+
+.timer-display {
+  font-size: 48px;
+  font-weight: bold;
+  color: var(--neon-blue);
+  text-shadow: 0 0 10px var(--neon-blue);
+  margin: 25px 0;
+}
+
+.progress-container {
+  width: 100%;
+  height: 20px;
+  background-color: #333;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(to right, var(--neon-blue), var(--neon-pink));
+  transition: width 0.5s;
+  box-shadow: 0 0 10px var(--neon-blue);
+}
+
+.note-card {
+  background: #222;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px var(--neon-blue);
+  color: #fff;
+  position: relative;
+  cursor: pointer;
+}
+
+.note-card button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 12px;
+}
+
+/* 📦 Modal */
+.modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background: #111;
+  padding: 20px;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px var(--neon-blue);
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .welcome-container {
+    flex-direction: column;
+  }
+
+  .welcome-image {
+    height: 200px;
+    border-radius: 20px 20px 0 0;
+  }
+
+  .welcome-right {
+    border-radius: 0 0 20px 20px;
+  }
+}
+/* 🧘 Custom Break Bars & Interval Bar */
+.break-bar {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--neon-blue);
+  border-radius: 14px;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 0 10px var(--neon-blue), inset 0 0 10px var(--neon-pink);
+}
+
+.break-bar h3 {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--neon-pink);
+  text-shadow: 0 0 5px var(--neon-pink);
+  margin-bottom: 12px;
+}
+
+.break-bar label {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--text-light);
+}
+
+.break-bar input,
+.break-bar textarea {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--neon-blue);
+  color: #fff;
+  padding: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 10px;
+  box-shadow: 0 0 6px var(--neon-blue);
+  transition: all 0.3s;
+}
+
+.break-bar input:focus,
+.break-bar textarea:focus {
+  outline: none;
+  box-shadow: 0 0 10px var(--neon-pink);
+  border-color: var(--neon-pink);
+}
+/* 🔧 Force Remove Neon Glow from Custom Input Fields */
+#custom-break,
+#custom-message,
+#interval {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid #555;
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 12px;
+  border-radius: 10px;
+  box-shadow: none !important; /* 🚫 Remove all glow */
+  outline: none;
+}
+
+#custom-break:focus,
+#custom-message:focus,
+#interval:focus {
+  border-color: var(--neon-blue); /* Optional blue border on focus */
+  box-shadow: none !important;
+}

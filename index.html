@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PausePal</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+  <!-- Cyberpunk Background -->
+  <div class="cyberpunk-waves"></div>
+
+  <!-- Dark Mode Toggle -->
+  <div class="toggle-container">
+    <label class="theme-switch">
+      <input type="checkbox" id="darkToggle" onchange="toggleDarkMode()">
+      <span class="switch-label">Toggle Dark</span>
+    </label>
+  </div>
+
+  <!-- Welcome Screen -->
+  <div class="screen active" id="welcome-screen">
+    <div class="welcome-container">
+      <div class="welcome-left">
+        <img src="pexels-mayis-48519569-10801695.jpg" alt="Workspace with Plant, Candle, and Devices" class="welcome-image" />
+      </div>
+      <div class="welcome-right">
+        <div class="logo-text"><em>PausePal</em></div>
+        <div class="tagline">Boost your productivity with mindful breaks!</div>
+        <button onclick="goToScreen('settings-screen')"><span>🡺</span> Get Started</button>
+        <button id="product-info-btn"><span>🡺</span> Product Info</button>
+      </div>
+    </div>
+    <div class="footer credit">
+      Photo by <a href="https://www.pexels.com/@mayis/" target="_blank">Mayis</a> on 
+      <a href="https://www.pexels.com/photo/work-space-with-candle-and-charging-phone-on-desk-10801695/" target="_blank">Pexels</a>
+      © 2025 Ariba Arzi | Version 1.0.0
+    </div>
+  </div>
+
+  <!-- Settings Screen -->
+  <div class="screen" id="settings-screen">
+    <div class="settings-heading-bar">
+      <h2>Set Your Break Preferences</h2>
+    </div>
+
+    <div class="checkbox-group">
+      <label><input type="checkbox" value="Drink Water"/> Drink Water</label>
+      <label><input type="checkbox" value="Stretch"/> Stretch</label>
+      <label><input type="checkbox" value="Breathe"/> Breathe</label>
+      <label><input type="checkbox" value="Look Away"/> Look Away</label>
+    </div>
+
+    <div class="break-bar">
+      <h3>Add Custom Break</h3>
+      <label for="custom-break">Break Task:</label>
+      <input type="text" id="custom-break" placeholder="e.g., Walk the Dog 🐾"/>
+    </div>
+
+    <div class="break-bar">
+      <h3>Custom Message</h3>
+      <label for="custom-message">Your Reminder:</label>
+      <input type="text" id="custom-message" placeholder="e.g., Time to hydrate 💧"/>
+    </div>
+
+    <div class="break-bar">
+      <h3>Break Interval</h3>
+      <label for="interval">Minutes Between Breaks:</label>
+      <input type="number" id="interval" value="25"/>
+    </div>
+
+    <div class="button-group">
+      <button onclick="saveSettings()">Save & Continue</button>
+      <button onclick="goToScreen('notes-screen')">📝 Notes</button>
+      <button onclick="goToScreen('stats-screen')">📊 Stats</button>
+    </div>
+    <button class="back-button styled-back" onclick="goToScreen('welcome-screen')">Back</button>
+  </div>
+
+  <!-- Timer Screen -->
+  <div class="screen" id="home-screen">
+    <h2>Next Break In:</h2>
+    <div id="timer" class="timer-display">25:00</div>
+    <div class="button-group">
+      <button onclick="startTimer()">Start</button>
+      <button onclick="pauseTimer()">Pause</button>
+      <button onclick="resetTimer()">Reset</button>
+    </div>
+    <br/>
+    <button class="back-button styled-back" onclick="goToScreen('settings-screen')">Back</button>
+  </div>
+
+  <!-- Reminder Screen -->
+  <div class="screen" id="reminder-screen">
+    <h2>Time to take a break!</h2>
+    <pre id="quote" class="quote-box"></pre>
+    <div class="button-group">
+      <button onclick="dismissReminder()">Dismiss</button>
+      <button onclick="snoozeReminder()">Snooze</button>
+    </div>
+    <br/>
+    <a href="#" onclick="goToScreen('home-screen')">Back</a>
+  </div>
+
+  <!-- Stats Screen -->
+  <div class="screen" id="stats-screen">
+    <h2>Today's Progress</h2>
+    <p>Breaks Taken: <span id="break-count">0</span></p>
+    <div class="progress-container">
+      <div class="progress-bar" id="progress-bar"></div>
+    </div>
+    <ul id="break-log"></ul>
+    <div class="button-group">
+      <button onclick="goToScreen('home-screen')">Back to Timer</button>
+    </div>
+  </div>
+
+  <!-- Notes Screen -->
+  <div class="screen" id="notes-screen">
+    <h2>My Notes</h2>
+    <button class="back-button styled-back" onclick="goToScreen('settings-screen')">Back</button>
+    <div class="notes-list" id="notes-list"></div>
+    <button class="add-note-btn" onclick="openNewNoteModal()">+ New Note</button>
+  </div>
+
+  <!-- Product Info Screen -->
+  <div class="screen" id="product-info-screen">
+    <div class="settings-heading-bar">
+      <h2>Product Brief</h2>
+    </div>
+
+    <section>
+      <h3 style="color: var(--neon-pink);">🌟 Vision</h3>
+      <p style="font-size: 18px; color: var(--text-light);">
+        PausePal was built with the idea that small, intentional pauses can drastically improve your mental well-being and productivity. It promotes mindful breaks and meaningful focus sessions in a beautifully designed interface.
+      </p>
+    </section>
+
+    <section>
+      <h3 style="color: var(--neon-blue);">📌 Why PausePal?</h3>
+      <p style="font-size: 18px; color: var(--text-light);">
+        In today's hyper-connected world, burnout and distraction are common. PausePal is designed to combat this by encouraging structured breaks, supporting note-taking, and tracking your streaks — helping you stay grounded and productive.
+      </p>
+    </section>
+    
+    <section>
+  <h3 style="color: var(--neon-blue);">📛 Name Origin</h3>
+  <p style="font-size: 18px; color: var(--text-light);">
+    The name <strong>PausePal</strong> is derived from a thoughtful blend of meanings:
+    <br/><br/>
+    <strong>“Pause”</strong> stands for taking a break — a mindful stop amidst the rush. 
+    <strong>“Pal”</strong> is inspired by the Hindi word for “moment” (पल).
+    <br/><br/>
+    Together, <strong>PausePal</strong> means <em>“pause the moment”</em> — reminding us to slow down, reflect, and recharge during our busy lives.
+  </p>
+</section>
+
+    <section>
+      <h3 style="color: var(--neon-pink);">🛠️ How I Created It</h3>
+      <p style="font-size: 18px; color: var(--text-light);">
+        Built using pure HTML, CSS, and JavaScript, PausePal features dark/light mode, a fully functional notes app, reminder system, and motivational break messages. Each screen was carefully crafted to support an elegant yet vibrant experience.
+      </p>
+    </section>
+
+    <section>
+      <h3 style="color: var(--neon-blue);">💼 For Wellness & Productivity</h3>
+      <p style="font-size: 18px; color: var(--text-light);">
+        PausePal is more than a break timer — it’s a personal companion for your mental well-being. Whether you're studying, working, or simply reflecting, it helps build mindful habits through regular breaks and personal note journaling.
+      </p>
+    </section>
+
+    <section>
+      <h3 style="color: var(--neon-pink);">🗣️ Feedback & Queries</h3>
+      <form action="https://formspree.io/f/mwpbgpnq" method="POST" class="feedback-form">
+        <label for="name">Your Name:</label>
+        <input type="text" name="name" id="name" required>
+
+        <label for="email">Your Email:</label>
+        <input type="email" name="email" id="email" required>
+
+        <label for="message">Your Feedback or Questions:</label>
+        <textarea name="message" id="message" rows="4" required></textarea>
+
+        <button type="submit">Send Feedback</button>
+      </form>
+    </section>
+
+    <div class="button-group">
+      <button class="styled-back" onclick="goToScreen('welcome-screen')">Back</button>
+    </div>
+  </div>
+
+  <!-- Note Modal -->
+  <div class="modal" id="note-editor">
+    <div class="modal-content">
+      <h3 id="editor-title">New Note</h3>
+      <input type="text" id="note-title" placeholder="Title" />
+      <textarea id="note-content" placeholder="Write your note..."></textarea>
+      <input type="file" id="image-input" accept="image/*" onchange="handleImageUpload(event)" />
+      <div id="image-preview"></div>
+      <div class="toolbar">
+        <button onclick="toggleChecklist()">Checklist</button>
+        <button onclick="applyTemplate()">Template</button>
+        <button onclick="changeWallpaper()">Wallpaper</button>
+        <button onclick="lockNote()">Lock</button>
+        <button onclick="exportPDF()">Export PDF</button>
+        <button onclick="shareNote()">Share</button>
+      </div>
+      <div class="modal-actions">
+        <button onclick="saveNote()">Save</button>
+        <button onclick="deleteCurrentNote()">Delete</button>
+        <button onclick="closeEditor()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+  <script>
+    document.getElementById("product-info-btn").addEventListener("click", function () {
+      goToScreen("product-info-screen");
+    });
+  </script>
+</body>
+</html>
