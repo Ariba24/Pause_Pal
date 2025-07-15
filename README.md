@@ -83,7 +83,7 @@ pausepal/
 ## 🧑‍💻 Author
 Made with 💖 by Ariba Arzi  
 📬 Email: aribarzi07@gmail.com  
-🔗 Connect on LinkedIn
+🔗 Connect on LinkedIn: www.linkedin.com/in/aribaarzi2207
 
 ## 🙏 Acknowledgements
 - UI Photo by Mayis on Pexels  
