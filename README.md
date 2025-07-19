@@ -84,7 +84,7 @@ pausepal/
 Made with 💖 by Ariba Arzi  
 📬 Email: aribarzi22@gmail.com  
 🔗 Connect on LinkedIn: www.linkedin.com/in/aribaarzi2207##  
-💻 [GitHub Profile](https://github.com/your-github-handle)
+
 
 ## 🙏 Acknowledgements
 - UI Photo by Mayis on Pexels  
